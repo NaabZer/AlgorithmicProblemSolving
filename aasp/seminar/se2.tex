@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{utf8}
+\usepackage{listings}
+
+\title{TDDD95 \- Seminar 1}
+
+\setlength\parindent{0pt}
+\setlength\parskip{\baselineskip}
+
+\begin{document}
+\maketitle{}
+
+\section{problems}
+\subsection{Spiderman's workout}
+
+Dynamic programming.
+
+for \emph{Optimal substructure} and \emph{overlapping subproblems}
+
+\emph{Optimal substructure} \- means there is a solution that can be obtained by combining
+optimal solutions to it's subproblem.
+
+\emph{Overlapping subproblems} \- means that finding a solution involves solving the same
+subproblem several times.
+
+\subsection{Ljutna}
+Solved.
+
+\subsection{Help!}
+Iterate over pairs, if there are a word a placeholder, replace all placeholders
+of the same type. Then reiterate and see if there are any unmatching words.
+
+\subsection{Aspen avenue}
+Sort according to left side of the road.
+
+Define a \emph{decision state} as having assigned $x$ trees to the left side,
+and $y$ trees to the right side. Now, given that we want to assign the tree with
+index $i=x+y+1$, do exactly what we did with the spiderman problem: Try the two
+options that we have: Left of right(brute-force)
+
+Since a subproblem can be defined by it's \empth{decision state}, we can use a
+table to stroe solutions to subproblems using an array dp[1000][1000]
+
+Time complexity: $O(N^2)$
+
+\section{Time Limits and Computational Complexity}
+
+\section{Basic data structures}
+\subsection{Linear data structures}
+\begin{itemize}
+    \item Pair, Tuple (C++11)
+    \item Static array
+    \item Vector (ArrayList or Vector)
+    \item bitset (BitSet)
+    \item stack (Stack)
+    \item queue
+    \item dequeue
+\end{itemize}
+
+\subsection{Rip more stuff}
+
+\section{Lab problems}
+
+\subsection{Interval Cover}
+Problem: Given an interval $[L,R]$ and a set of other intervals
+${[l_1,r_1], \ldots , [l_n,r_n]}$, find the minimal number of such intervals
+that are needed to cover $[L, R]$.
+
+Super simple greedy algorithm:
+\begin{itemize}
+    \item ``do as long as you can'': Cover the ``left part'' $L$ of the target interval
+$[L,R]$ with ``the interval $[l,r]$ that covers $L$ and has the largest $r$ of
+all such intervals'' (then set $[L, R] := [r,R]$)
+\end{itemize}
+
+\subsection{Knapsack}
+Solved by dynamic programs. ``Should I put item $i$ in the knapsack if I carry
+$w$ weight''?
+
+State: $[i][w]$
+
+Generalizes \textbf{MANY} well-known optimiation problems.
+
+\subsection{Disjoint set}
+The \emph{disjoint set} is a data structure for storing a set of disjoing sets
+where it is very effiecient $\approx O(1)$ to \emph{find} which set an element
+belongs to and to merge (``unify'') two sets.
+
+The disjoin sets are represented by a \emph{forest of trees}, where the root of a tree
+is the representative element for that set.
+
+To improve the performance use path compression.
+
+Example usage: Finding connected components in a unidercted graph or Kruskal's
+algorithm for finding a Minimum Spanning Tree.
+
+\subsection{Fenwick Tree}
+A Fenwick tree is an efficient data structure for computing range sum queries
+with updates, both in $O(\log n)$
+
+Naively, $O(n)$, so this is a great improvement
+
+A Fenwick tree only stores range sums, not the original values.
+
+Basic idea: Each intiger can be represented as sum of powers of two. In the same
+way, cumulative frequency can be represented as a sum of sets of subfrequencies.
+In our case, each set contains 
+
+Tips
+\begin{itemize}
+    \item Read original paper by Fenwick
+    \item Implementing only takes a few lines of code. Snipe online code
+    \item More important how to use than how to implement
+    \item Also known as BIT (Binary ... tree)
+\end{itemize}
+
+\section{Tips}
+\emph{Debugging}: If you get stuck for too long, ask for test dtaa that breaks
+algorithm.
+
+If you're still stuck, take a break with a new problem.
+
+Include everything!
+\begin{lstlisting}[c++]
+#include <bits/stdc++.hn>
+\end{lstlisting}
+
+
+\end{document}
