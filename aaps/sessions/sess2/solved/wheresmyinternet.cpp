@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 #include <unordered_map>
 using namespace std;
 
@@ -29,6 +30,17 @@ struct UnionFind{
             nodes[elem]->parent = nodes[elem];
         }
     }
+
+    UnionFind(int elems){
+        for(int i = 1; i < elems+1; i++){
+            Node<T>* node = (Node<T>*) malloc(sizeof(Node<T>*)); 
+            node->value = i;
+            node->r = 0;
+            nodes[i] = node;
+            nodes[i]->parent = nodes[i];
+        }
+    }
+
 
     T Find(T elem){
         if(nodes[elem]->parent != nodes[elem]){
@@ -61,6 +73,38 @@ struct UnionFind{
             cout << nodes[elem]->toString() << endl;
         }
         return "";
-
     }
 };
+
+int main(){
+    int elems, conns;
+    cin >> elems;
+    cin >> conns;
+
+    UnionFind<int> UF = UnionFind<int>(elems);
+
+    for(int c = 0; c < conns; c++){
+        int a, b;
+        cin >> a;
+        cin >> b;
+        UF.Union(a, b);
+    }
+
+    set<int> unconnected;
+    int rootP = UF.Find(1);
+    for(int c = 1; c < elems+1; c++){
+        if(UF.Find(c) != rootP){
+            unconnected.insert(c);
+        }
+    }
+
+    if(unconnected.size() == 0){
+        cout << "Connected" << endl;
+    }else {
+        for(auto elem: unconnected){
+            cout << elem << endl;
+        }
+    }
+
+    return 0;
+}
