@@ -90,7 +90,7 @@ class Dijkstra{
         addEdge(from, to, cost, -1, -1);
     }
 
-    map<int, pair<int, Node*>> shortest_paths(int startIndex){
+    map<int, pair<int, Node*>> shortest_paths(int startIndex, int endIndex){
 
         for(auto n_pair: nodes){
             n_pair.second->cost = -1;
@@ -154,9 +154,16 @@ class Dijkstra{
             }
 
             ret[elem->index] = pair<int, Node*>(elem->cost, elem);
+            if(endIndex != -1 && elem->index == endIndex){
+                break;
+            }
         }
 
         return ret;
+    }
+
+    map<int, pair<int, Node*>> shortest_paths(int startIndex){
+        return shortest_paths(startIndex, -1);
     }
 
     vector<Node*> constructPath(Node* goalNode){
